@@ -1,7 +1,0 @@
-build_id='201410221708'
-commit_number='20cb7a5'
-version_tag='1.6.0'
-user='user'
-hostname='Wheezy'
-buildtools_version='2.0.8'
-product_name='tornik-traffic'

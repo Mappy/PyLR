@@ -1,0 +1,35 @@
+digraph G
+{
+	rating [label="_rating.py"];
+	fow [label="_fow.py"];
+
+	subgraph cluster0
+	{
+		binary [label="_binary.py", group="group1"];
+		constants [label="_constants.py", group="group1"];
+		values [label="_values.py"];
+		utils [label="_utils.py"];
+	}
+	
+
+	subgraph cluster1
+	{
+		data [shape=invhouse, label="Physical data", group="group0"];
+		parser [shape=rectangle, label="_parser.py", group="group0"];
+		decoder [shape=rectangle, label="_decoder.py", group="group0"];
+		consumer [shape=invhouse, group="group0"];
+		data -> parser -> decoder -> consumer;
+	}
+
+	parser -> binary [style=dotted]
+	rating -> fow [style=dotted]
+	binary -> constants [style=dotted]
+	decoder -> constants [style=dotted]
+	parser -> constants [style=dotted]
+	values -> constants [style=dotted]
+	decoder -> rating [style=dotted]
+	constants -> utils [style=dotted]
+	parser -> utils [style=dotted]
+	values -> utils [style=dotted]
+	binary -> values [style=dotted]
+}

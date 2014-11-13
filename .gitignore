@@ -1,0 +1,43 @@
+
+
+# Python bytecode
+*.pyc
+
+# swap files
+*.swp
+
+# object files
+*.o
+
+# Eclipse project files
+.project
+.settings
+.pydevproject
+.externalToolBuilders
+
+# tmp files
+*.log
+
+# log files
+*.tmp
+
+#egg-info files
+*.egg-info
+
+
+# build directories
+build
+dist
+MANIFEST
+
+# Code coverage generated files
+reports/*
+coverage-traffic-reports
+.coverage
+
+# nose tests result file
+*nosetests.xml
+*coverage.xml
+
+
+
