@@ -28,7 +28,6 @@
 # build directories
 build
 dist
-MANIFEST
 
 # Code coverage generated files
 reports/*

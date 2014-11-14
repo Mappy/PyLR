@@ -20,7 +20,7 @@ def run_tests(builddir="."):
     if not nose.run(defaultTest=','.join(TEST_MODULES), argv=["pylr-tests",
                                                               '--verbosity=2',
                                                               '--with-xunit',
-                                                              '--xunit-file=pylr-nosetests.xml'.format(builddir),
+                                                              '--xunit-file={}/pylr-nosetests.xml'.format(builddir),
                                                               '--nocapture'
                                                               ]):
         exit(1)
