@@ -7,30 +7,30 @@ Created on 4 déc. 2013
 
 from collections import namedtuple
 from bitstring import BitStream
-from ._utils import lazyproperty
-from ._constants import (LATEST_BINARY_VERSION,
-                         BINARY_VERSION_2,
-                         MIN_BYTES_LINE_LOCATION,
-                         MIN_BYTES_POINT_LOCATION,
-                         MIN_BYTES_CLOSED_LINE_LOCATION,
-                         MIN_BYTES_POLYGON,
-                         RELATIVE_COORD_SIZE,
-                         IS_POINT,
-                         HAS_ATTRIBUTES,
-                         GEOCOORD_SIZE,
-                         POINT_ALONG_LINE_SIZE,
-                         POINT_WITH_ACCESS_SIZE,
-                         POINT_OFFSET_SIZE,
-                         AREA_CODE_CIRCLE,
-                         AREA_CODE_RECTANGLE,
-                         AREA_CODE_POLYGON,
-                         RECTANGLE_SIZE,
-                         LARGE_RECTANGLE_SIZE,
-                         GRID_SIZE,
-                         LARGE_GRID_SIZE,
-                         LRP_SIZE,
-                         CIRCLE_BASE_SIZE,
-                         LocationType)
+from .utils import lazyproperty
+from .constants import (LATEST_BINARY_VERSION,
+                        BINARY_VERSION_2,
+                        MIN_BYTES_LINE_LOCATION,
+                        MIN_BYTES_POINT_LOCATION,
+                        MIN_BYTES_CLOSED_LINE_LOCATION,
+                        MIN_BYTES_POLYGON,
+                        RELATIVE_COORD_SIZE,
+                        IS_POINT,
+                        HAS_ATTRIBUTES,
+                        GEOCOORD_SIZE,
+                        POINT_ALONG_LINE_SIZE,
+                        POINT_WITH_ACCESS_SIZE,
+                        POINT_OFFSET_SIZE,
+                        AREA_CODE_CIRCLE,
+                        AREA_CODE_RECTANGLE,
+                        AREA_CODE_POLYGON,
+                        RECTANGLE_SIZE,
+                        LARGE_RECTANGLE_SIZE,
+                        GRID_SIZE,
+                        LARGE_GRID_SIZE,
+                        LRP_SIZE,
+                        CIRCLE_BASE_SIZE,
+                        LocationType)
 
 
 class BinaryParseError(Exception):
@@ -81,8 +81,9 @@ class _RawBinaryData(object):
     
     def __init__(self, data, base64=False):
         """ Constructor.
-        :param string data: Binaray data
-        :param bool base64: True if data is coded in base64
+        
+            :param string data: Binaray data
+            :param bool base64: True if data is coded in base64
         """
         if base64:
             data = data.decode("base64")
@@ -94,41 +95,46 @@ class _RawBinaryData(object):
         self._bs = BitStream(bytes=data)
 
     def getbits(self, *bits):
-        """ Read the given numbers of bits. 
-        :param tuple bits: Tuple of number of bits to read
-        :returns: Tuple of bit fields
-        :rtype: tuple
+        """ Read the given numbers of bits.
+        
+            :param tuple bits: Tuple of number of bits to read
+            :returns: Tuple of bit fields
+            :rtype: tuple
         """
         return tuple(self._bs.read(v) for v in bits)
     
     def get_position(self):
         """ Returns position in the bit stream.
-        :returns: Position in the bit stream
-        :rtype: int
+        
+            :returns: Position in the bit stream
+            :rtype: int
         """
         return self._bs.pos
 
     @property
     def num_bytes(self):
         """ Size of the decoded data.
-        :returns: Size of the decoded data.
-        :rtype: int
+        
+            :returns: Size of the decoded data.
+            :rtype: int
         """
         return self._sz
 
     @property
     def version(self):
         """ Return binary version of the data
-        :returns: Binary version of the data.
-        :rtype: int
+        
+            :returns: Binary version of the data.
+            :rtype: int
         """
         return self.header.ver
 
     @lazyproperty
     def header(self):
         """ Parse header (once) location type
-        :returns: Header data
-        :rtype: _BinaryHeader
+        
+            :returns: Header data
+            :rtype: _BinaryHeader
         """
         # Validate data size
         if self._sz < min(MIN_BYTES_LINE_LOCATION,
@@ -144,8 +150,9 @@ class _RawBinaryData(object):
     @lazyproperty
     def location_type(self):
         """ Parse location type (once)
-        :returns: Location type
-        :rtype: LocationType
+        
+            :returns: Location type
+            :rtype: LocationType
         """
         header = self.header
 
@@ -207,6 +214,7 @@ class _RawBinaryData(object):
 def init_binary_parsing(data, base64=False):
     """ Create an instance of _RawBinaryData
         The returned object can be passed to 'parse_binary'
+        
         :param string data: string describing the location
         :param bool base64: True if encoded in base 64
         :returns: Parsable data structure
@@ -218,6 +226,7 @@ def init_binary_parsing(data, base64=False):
 def parse_binary(data, base64=False):
     """ Parse binary data.
         Input is original data or an object returned by init_binary_parsing(...)
+        
         :param data: string (encoded or not) describing the location
         :param bool base64: True if encoded in base 64
         :returns: Object describing the parsed location, or an error object
@@ -268,12 +277,15 @@ from ._binary import (_parse_first_lrp,
 
 # LINE_LOCATION
 LineLocation = namedtuple('LineLocation',  HEAD_FIELDS+('flrp', 'llrp', 'points', 'poffs', 'noffs'))
+""" Line Location type
+"""
 
 def parse_line(rb):
     """ Parse line location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Line location
-    :rtype: LineLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Line location
+        :rtype: LineLocation
     """
     assert rb.location_type == LocationType.LINE_LOCATION
 
@@ -298,12 +310,15 @@ def parse_line(rb):
 
 # POINT_ALONG_LINE
 PointAlongLineLocation = namedtuple('PointAlongLineLocation',  HEAD_FIELDS+('flrp', 'llrp', 'poffs'))
+""" Point along location type
+"""
 
 def parse_point_along_line(rb):
     """ Parse point along line location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Point along line location
-    :rtype: PointAlongLineLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Point along line location
+        :rtype: PointAlongLineLocation
     """
     assert rb.location_type == LocationType.POINT_ALONG_LINE
 
@@ -316,12 +331,15 @@ def parse_point_along_line(rb):
 
 # GEO_COORDINATES
 GeoCoordinateLocation = namedtuple('GeoCoordinateLocation',  HEAD_FIELDS+('coords',))
+""" Coordinate location type
+"""
 
 def parse_geo_coordinates(rb):
     """ Parse geo coordinates location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Geographic coordinates location
-    :rtype: GeoCoordinateLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Geographic coordinates location
+        :rtype: GeoCoordinateLocation
     """
     assert rb.location_type == LocationType.GEO_COORDINATES
 
@@ -333,12 +351,15 @@ def parse_geo_coordinates(rb):
 # POI_WITH_ACCESS_POINT
 PoiWithAccessPointLocation = namedtuple('PoiWithAccessPointLocation',  HEAD_FIELDS+(
     'flrp', 'llrp', 'poffs', 'coords'))
+""" Poi with access location type
+"""
 
 def parse_poi_with_access_point(rb):
     """ Parse POI with access point
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: POI with access point location
-    :rtype: PoiWithAccessPointLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: POI with access point location
+        :rtype: PoiWithAccessPointLocation
     """
     assert rb.location_type == LocationType.POI_WITH_ACCESS_POINT
 
@@ -353,12 +374,16 @@ def parse_poi_with_access_point(rb):
 
 # CIRCLE
 CircleLocation = namedtuple('CircleLocation', HEAD_FIELDS+('coords', 'radius'))
+""" Circle Location type
+"""
+
 
 def parse_circle(rb):
     """ Parse circle location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Circle location
-    :rtype: CircleLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Circle location
+        :rtype: CircleLocation
     """
     assert rb.location_type == LocationType.CIRCLE
 
@@ -373,14 +398,17 @@ def parse_circle(rb):
 # RECTANGLE
 
 BBox = namedtuple('BBox', ('minx', 'miny', 'maxx', 'maxy'))
-RectangleLocation = namedtuple('RectangleLocation',  HEAD_FIELDS+('bbox',))
 
+RectangleLocation = namedtuple('RectangleLocation',  HEAD_FIELDS+('bbox',))
+""" Rectangle Location type
+"""
 
 def parse_rectangle(rb):
     """ Parse rectangle location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Rectangle location
-    :rtype: RectangleLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Rectangle location
+        :rtype: RectangleLocation
     """
     assert rb.location_type == LocationType.RECTANGLE
 
@@ -397,12 +425,15 @@ def parse_rectangle(rb):
 
 # GRID
 GridLocation = namedtuple('GridLocation',  HEAD_FIELDS+('bbox', 'cols', 'rows'))
+""" Grid Location type
+"""
 
 def parse_grid(rb):
     """ Parse grid location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Grid location
-    :rtype: GridLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Grid location
+        :rtype: GridLocation
     """
     assert rb.location_type == LocationType.GRID
 
@@ -424,9 +455,10 @@ ClosedLineLocation = namedtuple('ClosedLineLocation',  HEAD_FIELDS+('flrp', 'poi
 
 def parse_closed_line(rb):
     """ Parse closed line location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Closed line location
-    :rtype: ClosedLineLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Closed line location
+        :rtype: ClosedLineLocation
     """
     assert rb.location_type == LocationType.CLOSED_LINE
 
@@ -452,9 +484,10 @@ PolygonLocation = namedtuple('PolygonLocation',  HEAD_FIELDS+('points',))
 
 def parse_polygon(rb):
     """ Parse polygon location
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Polygon location
-    :rtype: PolygonLocation
+    
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Polygon location
+        :rtype: PolygonLocation
     """
     assert rb.location_type == LocationType.POLYGON
 

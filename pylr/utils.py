@@ -8,12 +8,13 @@ Created on 4 déc. 2013
 
 def enum(*sequential, **named):
     """ Create an enum type, as in the C language.
-    You can, as i C, list names without any value, or set a value by using a named argument.
-    But, of course, you cannot add unnamed arguments after named arguments...
-    :param sequential: list of strings
-    :param named: dictionnary of <strings:int value>
-    :return: A new type created by using the params.
-    :rtype: Enum  
+        You can, as i C, list names without any value, or set a value by using a named argument.
+        But, of course, you cannot add unnamed arguments after named arguments...
+        
+        :param sequential: list of strings
+        :param named: dictionnary of <strings:int value>
+        :return: A new type created by using the params.
+        :rtype: Enum  
     """
     enums = dict(zip(sequential, range(len(sequential))), **named)
     return type('Enum', (), enums)
@@ -21,16 +22,17 @@ def enum(*sequential, **named):
 
 def signum(x):
     """ Give info about the sign of the given int.
-    :param int x: Value whose sign is asked
-    :return: -1 if the given value is negative, 0 if it is null, 1 if it is positive
-    :rtype: int
+    
+        :param int x: Value whose sign is asked
+        :return: -1 if the given value is negative, 0 if it is null, 1 if it is positive
+        :rtype: int
     """
     return -1 if x < 0 else 0 if x == 0 else 1
 
 
 class lazyproperty(object):
     """ Meant to be used as decorator for lazy evaluation of an object attribute.
-    Property should represent non-mutable data, as it replaces itself.
+        Property should represent non-mutable data, as it replaces itself.
     """
     def __init__(self, fget):
         self.fget = fget

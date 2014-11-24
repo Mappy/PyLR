@@ -2,31 +2,31 @@
 '''
 Created on 2 janv. 2014
 
-@author: dmarteau
+@author: Mappy S.A.
 '''
 
-import _fow as fow
+import fow
 
 """
-indicates an excellent match of the attributes of the line with the
+Indicates an excellent match of the attributes of the line with the
 attributes specified in the LRP
 """
 EXCELLENT = 3
 
 """
-indicates a good match of the attributes of the line with the
- attributes specified in the LRP
+Indicates a good match of the attributes of the line with the
+attributes specified in the LRP
 """
 GOOD = 2
 
 """
-indicates an average match of the attributes of the line with the
+Indicates an average match of the attributes of the line with the
 attributes specified in the LRP
 """
 AVERAGE = 1
 
 """
-indicates a poor match of the attributes of the line with the
+Indicates a poor match of the attributes of the line with the
 attributes specified in the LRP
 """
 POOR = 0
@@ -82,9 +82,9 @@ _FOWRating[_to_index(fow.OTHER, fow.OTHER)] = EXCELLENT
 
 def get_fow_rating_category(fow1, fow2):
     """ Get FOW rating category
-    :param _RawBinaryData rb: Binary data describing the location
-    :returns: Polygon location
-    :rtype: PolygonLocation
+        :param _RawBinaryData rb: Binary data describing the location
+        :returns: Polygon location
+        :rtype: PolygonLocation
     """
     if fow1 > fow2:
         fow2, fow1 = fow1, fow2

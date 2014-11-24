@@ -2,18 +2,18 @@
 '''
 Created on 2 janv. 2014
 
-@author: dmarteau
+@author: Mappy S.A.
 '''
 from __future__ import print_function
 
 from collections import namedtuple
 from itertools import ifilter, groupby, chain
-import _rating as Rating
-from ._constants import (LocationType,
-                         WITH_LINE_DIRECTION,
-                         AGAINST_LINE_DIRECTION,
-                         BINARY_VERSION_2,
-                         BINARY_VERSION_3)
+import rating as Rating
+from .constants import (LocationType,
+                        WITH_LINE_DIRECTION,
+                        AGAINST_LINE_DIRECTION,
+                        BINARY_VERSION_2,
+                        BINARY_VERSION_3)
 
 
 ''' The Max_ node_ distance '''
@@ -146,6 +146,7 @@ class MapDatabase(object):
 
     """ Line interface
         distance: the distance from the search location
+        
         id: id of the line
         bear: the bearing according to the start node
         frc: the frc of the line
@@ -160,9 +161,10 @@ class MapDatabase(object):
 
     def connected_lines(self, node, frc_max, beardir):
         """ Return connected lines to/from the node 'node'
+        
             :param frc_max: the frc max of the requested lines
             :param beardir: select the inwards (AGAINST_LINE_DIRECTION)
-                            or the outwards (WITH_LINE_DIRECTION) connected lines
+            or the outwards (WITH_LINE_DIRECTION) connected lines
 
             return an iterable of objects of type Line
         """
@@ -171,6 +173,7 @@ class MapDatabase(object):
     def find_closeby_nodes(self, coords, max_node_dist):
         """ Look for all nodes at less than max_node_dist from
             the given coordinates
+            
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
 
@@ -181,11 +184,12 @@ class MapDatabase(object):
     def find_closeby_lines(self, coords, max_node_dist, frc_max, beardir):
         """ Look for all lines at less than max_node_dist from
             the given coordinates
+            
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
             :param frc_max: the frc max of the requested line
             :param beardir: select the inwards (AGAINST_LINE_DIRECTION)
-                            or the outwards (WITH_LINE_DIRECTION) connected lines
+            or the outwards (WITH_LINE_DIRECTION) connected lines
 
             return an iterable of Line objects
         """
@@ -193,15 +197,16 @@ class MapDatabase(object):
 
     def calculate_route(self, l1, l2, maxdist, lfrc, islastrp):
         """ Calculate the shortest path between two lines
+        
             :param l1: the first candidate line to begin the search from
             :param l2: the second candidate line to stop the search to
             :param maxdist: The maximum distance allowed
             :param lfrc: The least frc allowed
             :param islastrp: True if we are calculating the route to the last
-                             reference point
+            reference point
             :return: (route, length) where route is an iterable holding the lines found
-                     and length the calculated length  of the route
-
+            and length the calculated length  of the route
+    
             The method must throw a RouteNotFoundException or a RouteConstructionFailed
             exception in case a route cannot be calculated
         """
@@ -269,10 +274,11 @@ def calculate_pairs(lines1, lines2, lastline, islastrp, islinelocation):
     """ Each LRP might have several candidate lines. In order to find the best
         pair to start with each pair needs to be investigated and rated. The
         rating process includes:
-         - score of the first candidate line
-         - score of the second candidate line
-         - connection to the previously calculated path
-         - candidate lines shall not be equal
+        
+            - score of the first candidate line
+            - score of the second candidate line
+            - connection to the previously calculated path
+            - candidate lines shall not be equal
     """
     # check connection with previously calculated path
     for l1, score1 in lines1:
@@ -408,8 +414,8 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
             subsequent pair of LRPs the start LRP will hold the calculated route
             after finishing this method.
 
-            param: location: the location
-            param: candidates: an iterable holding tuples of (lrp,candidate_lines)
+            :param location: the location
+            :param candidates: an iterable holding tuples of (lrp,candidate_lines)
         """
 
         if not isinstance(candidates, (list, tuple)):

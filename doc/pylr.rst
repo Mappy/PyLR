@@ -11,82 +11,66 @@ Subpackages
 Submodules
 ----------
 
-pylr._binary module
--------------------
-
-.. automodule:: pylr._binary
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._constants module
-----------------------
-
-.. automodule:: pylr._constants
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._decoder module
---------------------
-
-.. automodule:: pylr._decoder
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._fow module
-----------------
-
-.. automodule:: pylr._fow
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._parser module
--------------------
-
-.. automodule:: pylr._parser
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._rating module
--------------------
-
-.. automodule:: pylr._rating
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr._utils module
+pylr.binary module
 ------------------
 
-.. automodule:: pylr._utils
+.. automodule:: pylr.binary
     :members:
     :undoc-members:
     :show-inheritance:
 
-pylr._values module
--------------------
-
-.. automodule:: pylr._values
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr.build_manifest module
---------------------------
-
-.. automodule:: pylr.build_manifest
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-pylr.lbs_setup module
+pylr.constants module
 ---------------------
 
-.. automodule:: pylr.lbs_setup
+.. automodule:: pylr.constants
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.decoder module
+-------------------
+
+.. automodule:: pylr.decoder
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.fow module
+---------------
+
+.. automodule:: pylr.fow
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.parser module
+------------------
+
+.. automodule:: pylr.parser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.rating module
+------------------
+
+.. automodule:: pylr.rating
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.utils module
+-----------------
+
+.. automodule:: pylr.utils
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+pylr.values module
+------------------
+
+.. automodule:: pylr.values
     :members:
     :undoc-members:
     :show-inheritance:
