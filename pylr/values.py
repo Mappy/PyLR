@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
+''' Define functions for transforming encoded values
 '''
-Created on 5 déc. 2013
 
-@author: Mappy S.A.
-'''
 from .utils import signum
 from .constants import (BIT24FACTOR_REVERSED,
                         DECA_MICRO_DEG_FACTOR,

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-'''
-Created on 2 janv. 2014
+''' OpenLR decoder and database interfaces
 
-@author: Mappy S.A.
+    Pylr use an abstract mapdatabase interface for accessing grapth data.
+    The map database is passed to the decoder for calculating route and shortest path between 
+    location reference points.
 '''
 from __future__ import print_function
 
@@ -138,12 +139,15 @@ class RouteConstructionFailed(RouteSearchException):
 
 
 class MapDatabase(object):
-
+    """ The map database is an abstract interface used by the decoder object.
+        Implementor of database should inherit from this abstract class.
+    """
+    
     """ Node interface
         distance: the distance from the search location
     """
     Node = namedtuple('Node', ('distance',))
-
+ 
     """ Line interface
         distance: the distance from the search location
         
@@ -196,7 +200,7 @@ class MapDatabase(object):
         raise NotImplementedError("MapDatabase:find_closeby_lines")
 
     def calculate_route(self, l1, l2, maxdist, lfrc, islastrp):
-        """ Calculate the shortest path between two lines
+        """ Calculate the shortest paths between two lines
         
             :param l1: the first candidate line to begin the search from
             :param l2: the second candidate line to stop the search to

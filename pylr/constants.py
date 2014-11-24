@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
+''' Constante definitions
 '''
-Created on 4 déc. 2013
 
-@author: Mappy S.A.
-
-'''
 
 from .utils import enum
 

@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-Created on 5 déc. 2013
-
-@author: Mappy S.A
+''' Fow constants
 '''
 
 UNDEFINED = 0

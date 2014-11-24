@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
+''' Handle Form Of Way (fow) rating
 '''
-Created on 2 janv. 2014
 
-@author: Mappy S.A.
-'''
 
 import fow
 

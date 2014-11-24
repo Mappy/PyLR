@@ -19,7 +19,9 @@ try:
                       DecoderError,
                       MapDatabase,
                       AGAINST_LINE_DIRECTION,
-                      WITH_LINE_DIRECTION, )
+                      WITH_LINE_DIRECTION,
+                      fow )
+    from pylr.rating import get_fow_rating_category
     import pyproj
 except:
     import traceback
@@ -170,3 +172,19 @@ class TestDecoder(TestCase):
         lines = self.decoder.find_candidate_lines(lrp)
         self.assertGreaterEqual(len(lines), 1)
         self.assertEquals(lines[0][0].id, 'Line1', lines)
+        
+    def test_fow_rating(self):
+        """ OpenLR decoder: test fow rating symmetry """
+        fows = [fow.UNDEFINED,
+                fow.MOTORWAY,
+                fow.MULTIPLE_CARRIAGEWAY,
+                fow.SINGLE_CARRIAGEWAY,
+                fow.ROUNDABOUT,
+                fow.TRAFFICSQUARE,
+                fow.SLIPROAD,
+                fow.OTHER]
+
+        for fow1 in fows:
+            for fow2 in fows:
+                self.assertEquals(get_fow_rating_category(fow1,fow2),
+                                  get_fow_rating_category(fow2,fow1))

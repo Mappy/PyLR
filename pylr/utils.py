@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-'''
-Created on 4 déc. 2013
-
-@author: Mappy S.A
+''' Some utilities
 '''
 
 
