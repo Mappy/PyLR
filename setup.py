@@ -2,7 +2,7 @@
 #
 # Copyrigth 2014 Mappy S.A
 #
-# Licensed under [FIXME]
+# Licensed under Apache Software License, Version 2.0
 #
 
 try:
@@ -29,11 +29,11 @@ setup(
     author="Mappy S.A",
 #    author_email=???,
 #    url=???,
-#    license=???,
-    description="Pylr is a piece of cake.",
+    license="AL2",
+    description="Pylr, an OpenLR (tm) decoder.",
     classifiers=[
-#        'License :: OSI Approved :: Apache Software License',
-    'Programming Language :: Python :: 2.7',
+     'License :: OSI Approved :: Apache Software License, Version 2.0',
+     'Programming Language :: Python :: 2.7',
 #    'Programming Language :: Python :: 3',
 #    'Programming Language :: Python :: 3.2',
 #    'Programming Language :: Python :: 3.3',
