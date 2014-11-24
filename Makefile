@@ -10,7 +10,7 @@ default:
 
 
 test:
-	python -m pylr.tests.units ./build
+	python -m pylr.tests.units
 
 
 # Install in develop mode
@@ -30,6 +30,8 @@ doc:
 	sphinx-apidoc -o doc/ pylr/
 	sphinx-build -b html doc/ build/doc/
 
+upload_doc:
+	rsync -av build/doc/ lbsdoc:/home/jenkins/datadoc/docs/pylr
 
 clean:
 	rm -rf build

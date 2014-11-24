@@ -6,7 +6,7 @@ Created on 4 déc. 2013
 
 '''
 
-from ._utils import enum
+from .utils import enum
 
 ''' The data format IDENTIFIER. '''
 IDENTIFIER = "binary"

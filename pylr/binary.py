@@ -6,12 +6,12 @@ Created on 4 déc. 2013
 '''
 
 from collections import namedtuple
-from ._values import (coordinates_values,
-                      rel_coordinates_values,
-                      distance_estimate,
-                      relative_distance)
+from .values import (coordinates_values,
+                     rel_coordinates_values,
+                     distance_estimate,
+                     relative_distance)
 
-from ._constants import (BINARY_VERSION_2, BINARY_VERSION_3)
+from .constants import (BINARY_VERSION_2, BINARY_VERSION_3)
 
 # lon (float) : longitude (in degrees)
 # lat (float) : latituded (in degrees)
@@ -61,6 +61,7 @@ ATTR6_BITS = (NR_RFU3, BEAR_BITS)
 
 def _parse_attr1(rb):
     ''' Parse the raw binary data bits defined by ATTR1_BITS
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: orientation, FRC, FOW
         :rtype: int, int, int
@@ -71,6 +72,7 @@ def _parse_attr1(rb):
 
 def _parse_attr2(rb):
     ''' Parse the raw binary data bits defined by ATTR2_BITS
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: lowest FRC to next LR-point, bearing
         :rtype: int, int
@@ -81,6 +83,7 @@ def _parse_attr2(rb):
 
 def _parse_attr3(rb):
     ''' Parse the raw binary data bits defined by ATTR3_BITS
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: distance interval to next LR-point
         :rtype: int
@@ -91,6 +94,7 @@ def _parse_attr3(rb):
 
 def _parse_attr4(rb):
     ''' Parse the raw binary data bits defined by ATTR3_BITS
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: positive offset length interval, negative offset length interval, bearing sector
         :rtype: int, int, int
@@ -101,6 +105,7 @@ def _parse_attr4(rb):
 
 def _parse_attr5(rb):
     ''' Parse the raw binary data bits defined by ATTR3_BITS
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Functionnal Road Class, Form Of Way
         :rtype: int, int
@@ -122,6 +127,7 @@ def _parse_attr6(rb):
 def _parse_coordinates(rb, bits, rel):
     ''' Parse the raw binary data bits to read coordinates. These ones can be read as absolute or relative coordinates.
         In the last case, the third parameter must be provided. Else, its value must be None.
+        
         :param _RawBinaryData rb: Binary data describing the location
         :param string bits: String describing the number of bits to read ; may be RLRP_COORDS_BITS or ABS_COORDS_BITS.
         :param Coords rel: If the ccordinates to read are supposed to be relative, this parameter gives the reference coordinates.
@@ -138,6 +144,7 @@ def _parse_coordinates(rb, bits, rel):
 
 def _parse_relative_coordinates(rb, rel):
     ''' Parse the raw binary data bits to read relative coordinates.
+    
         :param _RawBinaryData rb: Binary data describing the location
         :param Coords rel: Reference coordinates
         :returns: Coordinates
@@ -148,6 +155,7 @@ def _parse_relative_coordinates(rb, rel):
 
 def _parse_absolute_coordinates(rb):
     ''' Parse the raw binary data bits to read absolute coordinates.
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Coordinates
         :rtype: Coords
@@ -157,6 +165,7 @@ def _parse_absolute_coordinates(rb):
 
 def _parse_lrp(rb, bits, rel_coords):
     ''' Parse location reference point
+    
         :param _RawBinaryData rb: Binary data describing the location
         :param string bits: String describing the number of bits to read ; may be RLRP_COORDS_BITS or ABS_COORDS_BITS.
         :param Coords rel_coords: Reference coordinates.
@@ -184,6 +193,7 @@ def _parse_first_lrp(rb):
 
 def _parse_intermediate_lrp(rb, rel):
     ''' Parse any intermediate location reference point (coded in relative coordinates) of a location reference
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Location Reference Point
         :rtype: LocationReferencePoint
@@ -193,6 +203,7 @@ def _parse_intermediate_lrp(rb, rel):
 
 def _parse_last_line_lrp(rb, rel, sided=False):
     ''' Parse the last location reference point for some kinds of location references
+    
         :param _RawBinaryData rb: Binary data describing the location
         :param Coords rel: Reference coordinates
         :param bool sided: Must be set to True if a diding info must be read
@@ -208,6 +219,7 @@ def _parse_last_line_lrp(rb, rel, sided=False):
 
 def _parse_last_closed_line_attrs(rb):
     ''' Parse the last location reference point's attributes for the closed line location reference
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Functionnal Road Class, Form Of Way, bearing sector
         :rtype: int, int, int
@@ -220,6 +232,7 @@ def _parse_last_closed_line_attrs(rb):
 
 def _parse_offset(rb):
     ''' Parse positive or negative offset for some kinds of location references
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Estimate distance, in meters
         :rtype: int
@@ -234,6 +247,7 @@ def _parse_offset(rb):
 
 def _parse_radius(rb, radius_size):
     ''' Parse radius of circle location references.
+    
         :param _RawBinaryData rb: Binary data describing the location
         :param int radius_size: Number of bytes needed to read the radius
         :returns: Radius, in meters
@@ -245,6 +259,7 @@ def _parse_radius(rb, radius_size):
 
 def _parse_grid_dimensions(rb):
     ''' Parse grid location reference dimensions
+    
         :param _RawBinaryData rb: Binary data describing the location
         :returns: Number of columns, number of rows
         :rtype: int, int
