@@ -139,29 +139,51 @@ class RouteConstructionFailed(RouteSearchException):
 
 
 class MapDatabase(object):
-    """ The map database is an abstract interface used by the decoder object.
-        Implementor of database should inherit from this abstract class.
-    """
+    """ Abstract interface used by the decoder object.
     
-    """ Node interface
-        distance: the distance from the search location
-    """
-    Node = namedtuple('Node', ('distance',))
- 
-    """ Line interface
-        distance: the distance from the search location
+        Implementor of database should inherit from this abstract class.
         
-        id: id of the line
-        bear: the bearing according to the start node
-        frc: the frc of the line
-        fow: the fow of the line
+        MapDatabase defines two data structure as named tuples:
+        
+        :py:class:`MapDatabase.Node`
 
-        projected_len: return the value of the projected length of the search location
-                       (i.e) the distance between the start node and the projection of the
-                       point given by the search coordinates. None if the line is not
-                       projected
+        :py:class:`MapDatabase.Line`
+
+        These structures may be extended by MapDatabase implementor accordings to their specific needs.          
     """
+
+    Node = namedtuple('Node', ('distance',))
+    """
+        .. attribute:: distance
+       
+           The distance from the search location
+    """
+ 
     Line = namedtuple('Line', ('id', 'bear', 'frc', 'fow', 'len', 'projected_len'))
+    """
+        .. attribute:: id
+        
+            id of the line
+            
+        .. attribute:: bear
+        
+            the bearing according to the start node
+            
+        .. attribute:: frc
+        
+             the frc of the line
+             
+        .. attribute:: fow
+        
+            the fow of the line
+
+        .. attribute:: projected_len
+
+            return the value of the projected length of the search location
+            (i.e) the distance between the start node and the projection of the
+            point given by the search coordinates. None if the line is not
+            projected
+    """
 
     def connected_lines(self, node, frc_max, beardir):
         """ Return connected lines to/from the node 'node'
@@ -307,7 +329,7 @@ def singleline(candidates):
 class ClassicDecoder(DecoderBase, RatingCalculator):
     """ OpenLR location decoder that use an abstract  map object
 
-        See MapDatabase for map database  interface.
+        See :py:class:`MapDatabase` for map database  interface.
 
     """
     def __init__(self, map_database,
