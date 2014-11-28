@@ -27,17 +27,12 @@ setup(
     packages = ["pylr", "pylr.tests"],
     package_data = {},
     author="Mappy S.A",
-#    author_email=???,
-#    url=???,
+    url="https://github.com/Mappy/PyLR",
     license="AL2",
     description="Pylr, an OpenLR (tm) decoder.",
     classifiers=[
      'License :: OSI Approved :: Apache Software License, Version 2.0',
      'Programming Language :: Python :: 2.7',
-#    'Programming Language :: Python :: 3',
-#    'Programming Language :: Python :: 3.2',
-#    'Programming Language :: Python :: 3.3',
-#    'Programming Language :: Python :: 3.4',
     ],
     **kwargs
    )
