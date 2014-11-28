@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""jfdizojfjzoi
-
-koin koin
-
+""" 
 .. moduleauthor:: David Marteau <david.marteau@mappy.com>
 """
 

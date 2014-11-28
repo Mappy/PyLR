@@ -261,15 +261,15 @@ def parse_binary(data, base64=False):
 
 HEAD_FIELDS = ('version', 'type')
 
-from ._binary import (_parse_first_lrp,
-                      _parse_intermediate_lrp,
-                      _parse_last_line_lrp,
-                      _parse_last_closed_line_attrs,
-                      _parse_offset,
-                      _parse_relative_coordinates,
-                      _parse_absolute_coordinates,
-                      _parse_radius,
-                      _parse_grid_dimensions)
+from .binary import (_parse_first_lrp,
+                     _parse_intermediate_lrp,
+                     _parse_last_line_lrp,
+                     _parse_last_closed_line_attrs,
+                     _parse_offset,
+                     _parse_relative_coordinates,
+                     _parse_absolute_coordinates,
+                     _parse_radius,
+                     _parse_grid_dimensions)
 
 
 # LINE_LOCATION

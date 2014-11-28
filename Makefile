@@ -34,5 +34,7 @@ upload_doc:
 	rsync -av build/doc/ lbsdoc:/home/jenkins/datadoc/docs/pylr
 
 clean:
-	rm -rf build
+	rm -rf dist
+	rm -rf pylr/*.pyc
+
 
