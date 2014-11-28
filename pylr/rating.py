@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' Handle Form Of Way (fow) rating
+
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
 '''
 
 

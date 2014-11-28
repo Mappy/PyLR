@@ -22,7 +22,6 @@ Content
    status
    architecture
    pylr
-   olive
 
 Indices and tables
 ##################

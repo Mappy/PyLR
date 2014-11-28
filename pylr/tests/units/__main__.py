@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+""" 
+.. moduleauthor:: David Marteau <david.marteau@mappy.com>
+"""
 
 import sys
 

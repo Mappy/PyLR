@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' Support definition and intermediate parsing of binary encoded locations
+
+.. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
 '''
 
 from collections import namedtuple

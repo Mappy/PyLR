@@ -2,7 +2,7 @@
 '''
 Created on 4 déc. 2013
 
-.. moduleauthor:: Mappy S.A
+.. moduleauthor:: David Marteau <david.marteau@mappy.com>
 
 OpenLR decoder
 

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 ''' Constante definitions
+
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
 '''
 
 

@@ -2,7 +2,7 @@
 '''
 Created on 6 déc. 2013
 
-@author: dmarteau
+.. moduleauthor:: David Marteau <david.marteau@mappy.com>
 '''
 
 from pylr import  ( LocationType,

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' Some utilities
+
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
+    
 '''
 
 

@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' Location parser 
+
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
 '''
 
 from collections import namedtuple

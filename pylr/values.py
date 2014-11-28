@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' Define functions for transforming encoded values
+
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
 '''
 
 from .utils import signum

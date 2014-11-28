@@ -2,7 +2,8 @@
 '''
 Created on 8 janv. 2014
 
-@author: dmarteau
+.. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
 '''
 from __future__ import print_function
 

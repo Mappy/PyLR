@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 ''' OpenLR decoder and database interfaces
 
+    .. moduleauthor:: David Marteau <david.marteau@mappy.com>
+
     Pylr use an abstract mapdatabase interface for accessing grapth data.
     The map database is passed to the decoder for calculating route and shortest path between 
     location reference points.
