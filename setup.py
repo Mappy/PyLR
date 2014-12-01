@@ -19,7 +19,13 @@ if setuptools is not None:
    install_requires = ['bitstring']
    kwargs['install_requires'] = install_requires
 
-version=__import__('pylr').__version__
+
+def get_version():
+    local_vars = {}
+    exec(open('pylr/version.py'),{},local_vars)
+    return local_vars["__version__"]
+
+version = get_version()
 
 setup(
     name="pylr",

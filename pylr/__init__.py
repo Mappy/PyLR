@@ -8,9 +8,7 @@ OpenLR decoder
 
 '''
 
-__version_info__=(0,1,2)
-__version__ = "{0}.{1}.{2}".format(*__version_info__)
-
+from .version import __version_info__, __version_info__
 
 from .parser import (BinaryParseError,
                      BinaryVersionError,
