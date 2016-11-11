@@ -11,7 +11,7 @@ from __future__ import print_function
 
 from __future__ import absolute_import
 from collections import namedtuple
-from itertools import ifilter, groupby, chain
+from itertools import groupby, chain
 from . import rating as Rating
 from .constants import (LocationType,
                         WITH_LINE_DIRECTION,
@@ -401,7 +401,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
             candidates = (max(vals, key=rating_key) for k, vals in groupby(
                 sorted(candidates, key=group_key), key=group_key))
         if not with_details:
-            candidates = ifilter(lambda l_r: l_r[1] >= min_acc, candidates)
+            candidates = filter(lambda l_r: l_r[1] >= min_acc, candidates)
         lines = sorted(candidates, key=rating_key, reverse=True)
         if not with_details and not lines:
             raise DecoderNoCandidateLines("No candidate lines found....")

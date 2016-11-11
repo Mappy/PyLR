@@ -6,6 +6,7 @@
 '''
 
 from __future__ import absolute_import
+from base64 import b64decode
 from collections import namedtuple
 from bitstring import BitStream
 from .utils import lazyproperty
@@ -88,7 +89,7 @@ class _RawBinaryData(object):
             :param bool base64: True if data is coded in base64
         """
         if base64:
-            data = data.decode("base64")
+            data = b64decode(data)
         
         #: raw data size
         self._sz = len(data)
@@ -292,7 +293,7 @@ def parse_line(rb):
     assert rb.location_type == LocationType.LINE_LOCATION
 
     # number of intermediates points
-    num_intermediates = (rb.num_bytes - MIN_BYTES_LINE_LOCATION) / LRP_SIZE
+    num_intermediates = (rb.num_bytes - MIN_BYTES_LINE_LOCATION) // LRP_SIZE
     flrp = _parse_first_lrp(rb)
 
     points = []
@@ -465,7 +466,7 @@ def parse_closed_line(rb):
     assert rb.location_type == LocationType.CLOSED_LINE
 
     # number of intermediates points
-    num_intermediates = (rb.num_bytes - MIN_BYTES_CLOSED_LINE_LOCATION) / LRP_SIZE
+    num_intermediates = (rb.num_bytes - MIN_BYTES_CLOSED_LINE_LOCATION) // LRP_SIZE
     flrp = _parse_first_lrp(rb)
     
     points = []
@@ -495,7 +496,7 @@ def parse_polygon(rb):
 
     # number of points
     # MIN_BYTES_POLYGON include first point and 2 relatives points
-    num_intermediates = 2 + (rb.num_bytes - MIN_BYTES_POLYGON) / RELATIVE_COORD_SIZE
+    num_intermediates = 2 + (rb.num_bytes - MIN_BYTES_POLYGON) // RELATIVE_COORD_SIZE
     points = []
 
     rel = _parse_absolute_coordinates(rb)
