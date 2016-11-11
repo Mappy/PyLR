@@ -488,7 +488,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
                     if lastline is not None and lastline.id != l1.id:
                         self._handle_start_change(routes, l1, lrp, prevlrp)
                     break  # search finished
-                except RouteNotFoundException as RouteConstructionFailed:
+                except (RouteNotFoundException, RouteConstructionFailed):
                     # Let a chance to retry
                     route = None
 
