@@ -7,6 +7,7 @@ Created on 8 janv. 2014
 '''
 from __future__ import print_function
 
+from __future__ import absolute_import
 try:
     from math import sqrt
     from collections import namedtuple

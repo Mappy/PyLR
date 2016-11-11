@@ -5,6 +5,7 @@
 
 '''
 
+from __future__ import absolute_import
 from collections import namedtuple
 from bitstring import BitStream
 from .utils import lazyproperty
@@ -31,6 +32,7 @@ from .constants import (LATEST_BINARY_VERSION,
                         LRP_SIZE,
                         CIRCLE_BASE_SIZE,
                         LocationType)
+from six.moves import range
 
 
 class BinaryParseError(Exception):

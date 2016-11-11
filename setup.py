@@ -5,6 +5,7 @@
 # Licensed under Apache Software License, Version 2.0
 #
 
+from __future__ import absolute_import
 try:
    import setuptools
    from setuptools import setup

@@ -6,7 +6,8 @@
 '''
 
 
-import fow
+from __future__ import absolute_import
+from . import fow
 
 """
 Indicates an excellent match of the attributes of the line with the

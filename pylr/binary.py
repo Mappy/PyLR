@@ -5,6 +5,7 @@
 
 '''
 
+from __future__ import absolute_import
 from collections import namedtuple
 from .values import (coordinates_values,
                      rel_coordinates_values,
