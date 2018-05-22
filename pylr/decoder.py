@@ -4,7 +4,7 @@
     .. moduleauthor:: David Marteau <david.marteau@mappy.com>
 
     Pylr use an abstract mapdatabase interface for accessing grapth data.
-    The map database is passed to the decoder for calculating route and shortest path between 
+    The map database is passed to the decoder for calculating route and shortest path between
     location reference points.
 '''
 from __future__ import print_function
@@ -142,41 +142,41 @@ class RouteConstructionFailed(RouteSearchException):
 
 class MapDatabase(object):
     """ Abstract interface used by the decoder object.
-    
+
         Implementor of database should inherit from this abstract class.
-        
+
         MapDatabase defines two data structure as named tuples:
-        
+
         :py:class:`MapDatabase.Node`
 
         :py:class:`MapDatabase.Line`
 
-        These structures may be extended by MapDatabase implementor accordings to their specific needs.          
+        These structures may be extended by MapDatabase implementor accordings to their specific needs.
     """
 
     Node = namedtuple('Node', ('distance',))
     """
         .. attribute:: distance
-       
+
            The distance from the search location
     """
- 
+
     Line = namedtuple('Line', ('id', 'bear', 'frc', 'fow', 'len', 'projected_len'))
     """
         .. attribute:: id
-        
+
             id of the line
-            
+
         .. attribute:: bear
-        
+
             the bearing according to the start node
-            
+
         .. attribute:: frc
-        
+
              the frc of the line
-             
+
         .. attribute:: fow
-        
+
             the fow of the line
 
         .. attribute:: projected_len
@@ -189,7 +189,7 @@ class MapDatabase(object):
 
     def connected_lines(self, node, frc_max, beardir):
         """ Return connected lines to/from the node 'node'
-        
+
             :param frc_max: the frc max of the requested lines
             :param beardir: select the inwards (AGAINST_LINE_DIRECTION)
             or the outwards (WITH_LINE_DIRECTION) connected lines
@@ -201,7 +201,7 @@ class MapDatabase(object):
     def find_closeby_nodes(self, coords, max_node_dist):
         """ Look for all nodes at less than max_node_dist from
             the given coordinates
-            
+
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
 
@@ -212,7 +212,7 @@ class MapDatabase(object):
     def find_closeby_lines(self, coords, max_node_dist, frc_max, beardir):
         """ Look for all lines at less than max_node_dist from
             the given coordinates
-            
+
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
             :param frc_max: the frc max of the requested line
@@ -225,7 +225,7 @@ class MapDatabase(object):
 
     def calculate_route(self, l1, l2, maxdist, lfrc, islastrp):
         """ Calculate the shortest paths between two lines
-        
+
             :param l1: the first candidate line to begin the search from
             :param l2: the second candidate line to stop the search to
             :param maxdist: The maximum distance allowed
@@ -234,7 +234,7 @@ class MapDatabase(object):
             reference point
             :return: (route, length) where route is an iterable holding the lines found
             and length the calculated length  of the route
-    
+
             The method must throw a RouteNotFoundException or a RouteConstructionFailed
             exception in case a route cannot be calculated
         """
@@ -256,6 +256,7 @@ class RatingCalculator(object):
     RatingDetails = namedtuple('RatingDetails', ('bear_rating', 'frc_rating', 'fow_rating'))
 
     def _frc_rating(self, frc, linefrc):
+        return FRC_RATING[Rating.EXCELLENT]
         diff = abs(frc - linefrc)
         for cat in (Rating.EXCELLENT, Rating.GOOD, Rating.AVERAGE):
             if diff <= FRC_INTERVALS[cat]:
@@ -263,7 +264,7 @@ class RatingCalculator(object):
         return FRC_RATING[Rating.POOR]
 
     def _fow_rating(self, fow, linefow):
-        return FOW_RATING[Rating.get_fow_rating_category(fow, linefow)]
+        return 100
 
     def _distance_rating(self, dist):
         return max(0, self._max_node_dist - round(dist))
@@ -302,7 +303,7 @@ def calculate_pairs(lines1, lines2, lastline, islastrp, islinelocation):
     """ Each LRP might have several candidate lines. In order to find the best
         pair to start with each pair needs to be investigated and rated. The
         rating process includes:
-        
+
             - score of the first candidate line
             - score of the second candidate line
             - connection to the previously calculated path
