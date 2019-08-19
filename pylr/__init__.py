@@ -49,7 +49,7 @@ from .constants import (LocationType,
 
 
 
-import fow
+from pylr import fow
 
 
 from .decoder import (DecoderError,

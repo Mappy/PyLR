@@ -4,14 +4,14 @@
     .. moduleauthor:: David Marteau <david.marteau@mappy.com>
 
     Pylr use an abstract mapdatabase interface for accessing grapth data.
-    The map database is passed to the decoder for calculating route and shortest path between 
+    The map database is passed to the decoder for calculating route and shortest path between
     location reference points.
 '''
 from __future__ import print_function
 
 from collections import namedtuple
-from itertools import ifilter, groupby, chain
-import rating as Rating
+from itertools import groupby, chain
+from pylr import rating as Rating
 from .constants import (LocationType,
                         WITH_LINE_DIRECTION,
                         AGAINST_LINE_DIRECTION,
@@ -142,41 +142,41 @@ class RouteConstructionFailed(RouteSearchException):
 
 class MapDatabase(object):
     """ Abstract interface used by the decoder object.
-    
+
         Implementor of database should inherit from this abstract class.
-        
+
         MapDatabase defines two data structure as named tuples:
-        
+
         :py:class:`MapDatabase.Node`
 
         :py:class:`MapDatabase.Line`
 
-        These structures may be extended by MapDatabase implementor accordings to their specific needs.          
+        These structures may be extended by MapDatabase implementor accordings to their specific needs.
     """
 
     Node = namedtuple('Node', ('distance',))
     """
         .. attribute:: distance
-       
+
            The distance from the search location
     """
- 
+
     Line = namedtuple('Line', ('id', 'bear', 'frc', 'fow', 'len', 'projected_len'))
     """
         .. attribute:: id
-        
+
             id of the line
-            
+
         .. attribute:: bear
-        
+
             the bearing according to the start node
-            
+
         .. attribute:: frc
-        
+
              the frc of the line
-             
+
         .. attribute:: fow
-        
+
             the fow of the line
 
         .. attribute:: projected_len
@@ -189,7 +189,7 @@ class MapDatabase(object):
 
     def connected_lines(self, node, frc_max, beardir):
         """ Return connected lines to/from the node 'node'
-        
+
             :param frc_max: the frc max of the requested lines
             :param beardir: select the inwards (AGAINST_LINE_DIRECTION)
             or the outwards (WITH_LINE_DIRECTION) connected lines
@@ -201,7 +201,7 @@ class MapDatabase(object):
     def find_closeby_nodes(self, coords, max_node_dist):
         """ Look for all nodes at less than max_node_dist from
             the given coordinates
-            
+
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
 
@@ -212,7 +212,7 @@ class MapDatabase(object):
     def find_closeby_lines(self, coords, max_node_dist, frc_max, beardir):
         """ Look for all lines at less than max_node_dist from
             the given coordinates
-            
+
             :param coords: an tuple or iterable holding location coordinates
             :param max_node_dist: max distance to nearch for nodes
             :param frc_max: the frc max of the requested line
@@ -225,7 +225,7 @@ class MapDatabase(object):
 
     def calculate_route(self, l1, l2, maxdist, lfrc, islastrp):
         """ Calculate the shortest paths between two lines
-        
+
             :param l1: the first candidate line to begin the search from
             :param l2: the second candidate line to stop the search to
             :param maxdist: The maximum distance allowed
@@ -234,7 +234,7 @@ class MapDatabase(object):
             reference point
             :return: (route, length) where route is an iterable holding the lines found
             and length the calculated length  of the route
-    
+
             The method must throw a RouteNotFoundException or a RouteConstructionFailed
             exception in case a route cannot be calculated
         """
@@ -302,7 +302,7 @@ def calculate_pairs(lines1, lines2, lastline, islastrp, islinelocation):
     """ Each LRP might have several candidate lines. In order to find the best
         pair to start with each pair needs to be investigated and rated. The
         rating process includes:
-        
+
             - score of the first candidate line
             - score of the second candidate line
             - connection to the previously calculated path
@@ -389,8 +389,8 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
         rating_f = self.rating
         min_acc = self._min_acc_rating
 
-        rating_key = lambda (l, r): r
-        group_key = lambda (l, r): l.id
+        rating_key = lambda l, r: r
+        group_key = lambda l, r: l.id
 
         candidates = ((l, rating_f(lrp, l, n.distance)) for n in nodes for l in self._mdb.connected_lines(
             n, frc_max=frc_max, beardir=beardir))
@@ -400,7 +400,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
             candidates = (max(vals, key=rating_key) for k, vals in groupby(
                 sorted(candidates, key=group_key), key=group_key))
         if not with_details:
-            candidates = ifilter(lambda (l, r): r >= min_acc, candidates)
+            candidates = filter(lambda l, r: r >= min_acc, candidates)
         lines = sorted(candidates, key=rating_key, reverse=True)
         if not with_details and not lines:
             raise DecoderNoCandidateLines("No candidate lines found....")
@@ -467,7 +467,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
             lrpnext, nextlines = candidates[i+1]
             islastrp = lrpnext is lastlrp
             pairs = sorted(calculate_pairs(lines, nextlines, lastline,
-                           islastrp, islinelocation), key=lambda (p, r): r, reverse=True)
+                           islastrp, islinelocation), key=lambda p, r: r, reverse=True)
             # check candidate pairs
             for (l1, l2), _ in pairs[:nr_retry]:
                 if self.verbose:
@@ -487,7 +487,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
                     if lastline is not None and lastline.id != l1.id:
                         self._handle_start_change(routes, l1, lrp, prevlrp)
                     break  # search finished
-                except RouteNotFoundException, RouteConstructionFailed:
+                except (RouteNotFoundException, RouteConstructionFailed) as e:
                     # Let a chance to retry
                     route = None
 

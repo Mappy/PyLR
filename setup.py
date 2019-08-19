@@ -12,6 +12,9 @@ except ImportError:
    setuptools = None
    from distutils.core import setup
 
+from pylr.version import __version__ as version
+
+
 kwargs = {}
 
 if setuptools is not None:
@@ -19,13 +22,6 @@ if setuptools is not None:
    install_requires = ['bitstring']
    kwargs['install_requires'] = install_requires
 
-
-def get_version():
-    local_vars = {}
-    exec(open('pylr/version.py'),{},local_vars)
-    return local_vars["__version__"]
-
-version = get_version()
 
 setup(
     name="pylr",

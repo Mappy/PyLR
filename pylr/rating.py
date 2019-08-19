@@ -6,7 +6,7 @@
 '''
 
 
-import fow
+from pylr import fow
 
 """
 Indicates an excellent match of the attributes of the line with the
