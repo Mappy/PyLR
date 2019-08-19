@@ -5,6 +5,7 @@
 # Licensed under Apache Software License, Version 2.0
 #
 
+from __future__ import absolute_import
 try:
    import setuptools
    from setuptools import setup
@@ -21,7 +22,6 @@ if setuptools is not None:
    # If setuptools is not available, you're on your own for dependencies.
    install_requires = ['bitstring']
    kwargs['install_requires'] = install_requires
-
 
 setup(
     name="pylr",

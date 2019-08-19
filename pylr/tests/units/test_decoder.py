@@ -7,6 +7,7 @@ Created on 8 janv. 2014
 '''
 from __future__ import print_function
 
+from __future__ import absolute_import
 try:
     from math import sqrt
     from collections import namedtuple
@@ -69,7 +70,9 @@ Line = namedtuple('Line', MapDatabase.Line._fields+('start', 'end', 'bearin', 'b
 
 gall_proj = pyproj.Proj("+init=esri:54016")
 
-distance = lambda (x1, y1), (x2, y2): sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))
+def distance(xy_1, xy_2):
+    (x1, y1), (x2, y2) = xy_1, xy_2
+    return sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1))
 
 
 # Define a fake database

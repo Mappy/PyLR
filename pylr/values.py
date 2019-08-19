@@ -11,6 +11,7 @@ from .constants import (BIT24FACTOR_REVERSED,
                         BEARING_SECTOR,
                         LENGTH_INTERVAL,
                         RELATIVE_OFFSET_LENGTH)
+from decimal import Decimal, ROUND_HALF_UP
 
 
 def _get32BitRepresentation(v):
@@ -78,7 +79,8 @@ def distance_estimate(interval):
     """
     lower = interval * LENGTH_INTERVAL
     upper = (interval + 1) * LENGTH_INTERVAL
-    return round(((upper + lower) / 2))
+    middle = Decimal(str((upper + lower) / 2))
+    return float(middle.quantize(Decimal('1.'), rounding=ROUND_HALF_UP))
 
 
 def relative_distance(offset):

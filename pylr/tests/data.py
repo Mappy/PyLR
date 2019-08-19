@@ -5,6 +5,7 @@ Created on 6 déc. 2013
 .. moduleauthor:: David Marteau <david.marteau@mappy.com>
 '''
 
+from __future__ import absolute_import
 from pylr import  ( LocationType,
                     BBox,
                     LineLocation,

@@ -6,6 +6,9 @@
 '''
 
 
+from __future__ import absolute_import
+from six.moves import range
+from six.moves import zip
 def enum(*sequential, **named):
     """ Create an enum type, as in the C language.
         You can, as i C, list names without any value, or set a value by using a named argument.
@@ -16,7 +19,7 @@ def enum(*sequential, **named):
         :return: A new type created by using the params.
         :rtype: Enum  
     """
-    enums = dict(zip(sequential, range(len(sequential))), **named)
+    enums = dict(list(zip(sequential, list(range(len(sequential))))), **named)
     return type('Enum', (), enums)
 
 
@@ -36,12 +39,12 @@ class lazyproperty(object):
     """
     def __init__(self, fget):
         self.fget = fget
-        self.func_name = fget.__name__
+        self.__name__ = fget.__name__
         self.__doc__ = fget.__doc__
 
     def __get__(self, obj, cls):
         if obj is None:
             return None
         value = self.fget(obj)
-        setattr(obj, self.func_name, value)
+        setattr(obj, self.__name__, value)
         return value
