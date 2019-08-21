@@ -9,7 +9,6 @@ OpenLR decoder
 '''
 
 from __future__ import absolute_import
-from .version import __version_info__, __version_info__
 
 from .parser import (BinaryParseError,
                      BinaryVersionError,

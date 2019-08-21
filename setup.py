@@ -6,6 +6,7 @@
 #
 
 from __future__ import absolute_import
+
 try:
    import setuptools
    from setuptools import setup
@@ -13,19 +14,17 @@ except ImportError:
    setuptools = None
    from distutils.core import setup
 
-from pylr.version import __version__ as version
-
 
 kwargs = {}
 
 if setuptools is not None:
    # If setuptools is not available, you're on your own for dependencies.
-   install_requires = ['bitstring']
+   install_requires = ['bitstring', 'six']
    kwargs['install_requires'] = install_requires
 
 setup(
     name="pylr",
-    version=version,
+    version='3.0.0',
     packages = ["pylr", "pylr.tests"],
     package_data = {},
     author="Mappy S.A",

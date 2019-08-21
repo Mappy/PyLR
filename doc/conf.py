@@ -15,6 +15,7 @@
 from __future__ import absolute_import
 import sys
 import os
+import pkg_resources
 
 import sphinx_rtd_theme
 
@@ -47,14 +48,14 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PyLR'
-copyright = u'2014, Mappy S.A'
+copyright = u'2019, Mappy S.A'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = __import__('pylr').__version__
+version = pkg_resources.get_distribution("pylr").version
 # The full version, including alpha/beta/rc tags.
 release = version
 
