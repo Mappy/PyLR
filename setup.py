@@ -24,7 +24,7 @@ if setuptools is not None:
 
 setup(
     name="pylr",
-    version='3.0.1',
+    version='4.0.1',
     packages = ["pylr", "pylr.tests"],
     package_data = {},
     author="Mappy S.A",

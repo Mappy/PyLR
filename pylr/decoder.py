@@ -601,7 +601,7 @@ class ClassicDecoder(DecoderBase, RatingCalculator):
     @staticmethod
     def _calculated_path(pruned, poff, noff=0):
         length = sum(l.len for l in pruned)
-        return [l.id for l in pruned], length, poff, noff
+        return [(l.id.uuid, l.id.is_reversed, l.is_reversed_in_database, l.len) for l in pruned], length, poff, noff
 
     def decode_line(self, location):
         """ Decode a line from a list of a location reference points
